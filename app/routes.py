@@ -1,10 +1,21 @@
 from flask import render_template, request, jsonify
+# , Environment, PackageLoader, select_autoescape
 from app import app
 from app.model import predict_price
+from jinja2 import Environment, FileSystemLoader, PackageLoader, select_autoescape
+
+# @app.route('/')
+# def index():
+#     return render_template('index.html')
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    env = Environment(
+        loader=PackageLoader("app"),
+        autoescape=select_autoescape()
+    )
+    template = env.get_template("index.html")
+    return render_template(template)
 
 @app.route('/predict', methods=['POST'])
 def predict():

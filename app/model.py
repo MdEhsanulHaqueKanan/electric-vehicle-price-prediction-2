@@ -2,6 +2,16 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.ensemble import RandomForestRegressor
 import joblib
+from flask import Flask, render_template
+# Environment
+# , FileSystemLoader
+# , PackageLoader, select_autoescape
+from jinja2 import Environment, FileSystemLoader, PackageLoader, select_autoescape
+
+env = Environment(
+    loader=PackageLoader("app"),
+    autoescape=select_autoescape()
+)
 
 # Load the pre-trained model (make sure to save your model from the notebook)
 model = joblib.load('model/ev_price_model.pkl')
